@@ -2,9 +2,9 @@
 #include "Adafruit_MPR121.h"
 
 Adafruit_MPR121 cap = Adafruit_MPR121();
-uint16_t state[12]  = {};
+uint16_t state[12] = {};
 uint16_t rstate[12] = {};
-bool     tstate[12] = {};
+bool tstate[12] = {};
 
 void setup() {
   Serial.begin(9600);
@@ -15,10 +15,10 @@ void setup() {
   }
 
   Serial.println("Serial ready!");
-  
+
   if (!cap.begin(0x5A)) {
     Serial.println("cap (0x5A) error!");
-    while (1);
+    while (1) {}
   }
 
   Serial.println("cap (0x5A) ready!");
@@ -26,7 +26,7 @@ void setup() {
 
 void loop() {
   for (uint8_t i = 0; i < 12; i++) {
-    if (cap.filteredData(i) < cap.baselineData(i) - 5){
+    if (cap.filteredData(i) < cap.baselineData(i) - 5) {
       state[i]++;
       rstate[i] = 0;
     } else {
